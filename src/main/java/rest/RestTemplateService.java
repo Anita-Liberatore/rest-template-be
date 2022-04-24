@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import model.Link;
 import response.CategoriesResponse;
 
 @Component
@@ -23,6 +24,7 @@ public class RestTemplateService {
 
 	public static final String URL_COUNTRIES = "https://restcountries.com/v2/all";
 	public static final String URL_CATEGORIES = "https://api.yelp.com/v3/categories";
+	public static final String URL_SHORTLINK = "https://api.shrtco.de/v2/shorten?url=";
 
 	/*get all countries from url with Rest Template e mapping all data with List<Map<String, Object>>> */
 	public List<Map<String, Object>> getCountries() {
@@ -43,6 +45,19 @@ public class RestTemplateService {
 		return response;
 	}
 	
+	/*get response from shortlink api */
+	public Link getShortLinkApi(String link) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Content-Type", "application/json");
+		
+		RestTemplate restTemplate = new RestTemplate();	
+		ResponseEntity<Link> jsonResponseFromUrl = restTemplate.exchange(URL_SHORTLINK+link, HttpMethod.GET, new HttpEntity<>("parameters", headers), Link.class);
+		
+		Link response = jsonResponseFromUrl.getBody();
+		return response;
+	}
+
 	/*get all categories from url of YELP API */
 	public CategoriesResponse getCategories() {
 
