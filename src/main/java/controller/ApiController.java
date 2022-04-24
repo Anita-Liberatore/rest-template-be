@@ -27,7 +27,6 @@ public class ApiController {
 	}
 	
 	/* /categories This endpoint returns all Yelp business categories across all locales by default. Include the "locale" parameter to */
-	
 	@GetMapping("/categories")
 	public ResponseEntity<CategoriesResponse>  getCategories() {
 		return ResponseEntity.ok(rest.getCategories());
