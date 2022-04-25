@@ -32,6 +32,7 @@ public class ApiController {
 		return ResponseEntity.ok(rest.getCategories());
 	}
 	
+	/*get ping test */
 	@GetMapping("/ping")
 	@CrossOrigin
 	public ResponseEntity<String>  getPing() {
@@ -39,6 +40,7 @@ public class ApiController {
 		return ResponseEntity.ok(ping);
 	}
 	
+	/*get short link api  */
 	@GetMapping("/shorten/{link}")
 	@CrossOrigin
 	public ResponseEntity<Link>  getShortenLink(@PathVariable String link) {
